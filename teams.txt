@@ -6,14 +6,6 @@ Les Clay, YES, Wynonna Brown
 Kimmy Stein, NO, Bill and Hillary Stein
 Diego Soto, YES, Robin and Sarika Soto
 ==========
-Raptors
-Sammy Adams, NO, Jeff Adams
-Suzane Greenberg, YES, Henrietta Dumas
-Arnold Willis, NO, Claire Willis
-Karl Saygan, YES, Heather Bledsoe
-Matt Gill, NO, Charles and Sylvia Gill
-Jill Tanner, YES, Clara Tanner
-==========
 Dragons
 Herschel Krustofski, YES, Hyman and Rachel Krustofski
 Eva Gordon, NO, Wendy and Mike Gordon
@@ -21,4 +13,12 @@ Bill Bon, YES, Sara and Jenny Bon
 Sal Dali, NO, Gala Dali
 Joe Smith, YES, Jim and Jan Smith
 Joe Kavalier, NO, Sam and Elaine Kavalier
+==========
+Raptors
+Sammy Adams, NO, Jeff Adams
+Suzane Greenberg, YES, Henrietta Dumas
+Arnold Willis, NO, Claire Willis
+Karl Saygan, YES, Heather Bledsoe
+Matt Gill, NO, Charles and Sylvia Gill
+Jill Tanner, YES, Clara Tanner
 ==========

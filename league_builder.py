@@ -22,15 +22,18 @@ def sort_players(players):
 	no_exp.sort(key=sort_height)
 	return some_exp, no_exp
 
-def create_teams(players):
-	some_exp, no_exp = sort_players(players)
-	draft, second, third = ([], [], []) 
-	total_players = len(some_exp) + len(no_exp)
-	for index in range(total_players):
-		pick = some_exp if index % 2 else no_exp
-		draft.append(pick.pop())
-		third, draft, second = draft, second, third
-	return draft, second, third
+def shift(teams):
+        return teams[1:] + [teams[0]]
+
+def create_teams(players, count):
+        some_exp, no_exp = sort_players(players)
+        teams = [[] for x in range(count)]
+        total_players = len(some_exp) + len(no_exp)
+        for index in range(total_players):
+                pick = some_exp if index % 2 else no_exp
+                teams[0].append(pick.pop())
+                teams = shift(teams)
+        return teams
 
 def print_team(team):
 	string = "{}\n".format(team[0].title())
@@ -40,17 +43,16 @@ def print_team(team):
 	return string 
 
 def print_league(league):
-	printout = ""
+        printout = ""
         for team in league.items():
                 printout += print_team(team)
-	return printout
+        return printout
 
 def save_league(printout):
 	with open("teams.txt", "w") as league:
 		league.write(printout)
 
 def create_letter(**kwargs):
-	#letter = { "date" : date, **letter1 }
 	string = """
 Dear {Guardian Name(s)},
 
@@ -66,7 +68,7 @@ up on time, 'aight?
 
 Coach Biff
 
-First practice on {date} at 4pm
+First practice is a week from now, {date} at 4pm
 """.format(**kwargs)
 	return string
 
@@ -78,11 +80,32 @@ def mail_letters(league):
 			with open("{}.txt".format(player["Name"].replace(" ", "_")), "w") as file:
 				file.write(letter)
 
+def get_team_count(players):
+        print("How many teams are in the league?")
+        while True:
+            try:
+                team_count = int(input("> "))
+            except ValueError:
+                print("Enter a valid number of teams...")
+            else:
+                return create_teams(players, team_count)
+
+def name_teams(teams):
+        league = {}
+        for index, team in enumerate(teams):
+            print("Enter name for team {} out of {}:".format(index + 1,len(teams)))
+            team_name = input("> ")
+            league[team_name] = team
+        return league
+
 	
 if __name__ == "__main__":
-	players = get_players()
-	first, second, third = create_teams(players)
-	league = { "sharks": first, "dragons": second, "raptors": third }
-	printout = print_league(league)
-	save_league(printout)
-	mail_letters(league)	
+        players = get_players()
+        # Comment out these next two lines and uncomment the third
+        # to let user insert infinite number of teams
+        first, second, third = create_teams(players, 3)
+        league = { "sharks": first, "dragons": second, "raptors": third }
+        #league = name_teams(get_team_count(players))
+        printout = print_league(league)
+        save_league(printout)
+        mail_letters(league)	
