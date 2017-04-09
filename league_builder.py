@@ -1,13 +1,20 @@
+import os
 import csv
 import random
 import datetime
 
 def get_players():
         """Opens the player csv and returns the player as a list"""
-        with open("soccer_players.csv") as file:
+        with open("./csv/soccer_players.csv") as file:
                 reader = csv.DictReader(file)
                 players = list(reader)
         return players
+
+def create_dir(path):
+        try:
+                os.makedirs(path)
+        except OSError:
+                pass
 
 def sort_height(current):
         """Sorting comparitor"""
@@ -63,7 +70,8 @@ def print_league(league):
 
 def save_league(printout):
         """Writes league to a teams text file"""
-        with open("teams.txt", "w") as league:
+        create_dir("./league")
+        with open("./league/teams.txt", "w") as league:
                 league.write(printout)
 
 def create_letter(**kwargs):
@@ -89,30 +97,31 @@ First practice is a week from now, {date} at 4pm
 def mail_letters(league):
         """Creates and saves parental letters for the entire league"""
         date = datetime.date.today()+ datetime.timedelta(days=7)
+        create_dir("./league/letters")
         for team, players in league.items():
                 for player in players:
                         letter = create_letter(team=team,date=date, **player)
-                        with open("{}.txt".format(player["Name"].replace(" ", "_")), "w") as file:
+                        with open("./league/letters/{}.txt".format(player["Name"].replace(" ", "_")), "w") as file:
                                 file.write(letter)
 
 def get_team_count(players):
         """User input for team creation"""
         print("How many teams are in the league?")
         while True:
-            try:
-                team_count = int(input("> "))
-            except ValueError:
-                print("Enter a valid number of teams...")
-            else:
-                return create_teams(players, team_count)
+                try:
+                        team_count = int(input("> "))
+                except ValueError:
+                        print("Enter a valid number of teams...")
+                else:
+                        return create_teams(players, team_count)
 
 def name_teams(teams):
         """User input for team naming"""
         league = {}
         for index, team in enumerate(teams):
-            print("Enter name for team {} out of {}:".format(index + 1,len(teams)))
-            team_name = input("> ")
-            league[team_name] = team
+                print("Enter name for team {} out of {}:".format(index + 1,len(teams)))
+                team_name = input("> ")
+                league[team_name] = team
         return league
 
 	
