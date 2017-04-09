@@ -82,7 +82,7 @@ I regret to inform you that {Name} will be playing with
 the {team} this year. They really didn't seem like they 
 wanted to be at tryouts in the first place. God knows I
 didn't. Are you sure {Name} is the "sports type"? One too
-many Tolken books if you ask me.Anyway, the {team} ain't
+many Tolken books if you ask me. Anyway, the {team} ain't
 winning any Heisman's this year, I'm sure {Name} can sit 
 bench and carry balls with the best of them. You should be 
 so proud blah blah blah...just remember to pick the weasel
